@@ -13,7 +13,6 @@ cashier_instance = Cashier()
 
 
 def main():
-    machine = SandwichMaker(resources)
 
     while True:
         choice = input("small/medium/large/report/off: ").lower().strip()
@@ -21,17 +20,17 @@ def main():
         if choice == "off":
             break
         if choice == "report":
-            machine.report()
+            sandwich_maker_instance.report()
             continue
         if choice not in recipes:
             print("Invalid option.")
             continue
 
         item = recipes[choice]
-        if machine.check_resources(item["ingredients"]):
-            money = machine.process_coins()
-            if machine.transaction_result(money, item["cost"]):
-                machine.make_sandwich(choice, item["ingredients"])
+        if sandwich_maker_instance.check_resources(item["ingredients"]):
+            money = cashier_instance.process_coins()
+            if cashier_instance.transaction_result(money, item["cost"]):
+                sandwich_maker_instance.make_sandwich(choice, item["ingredients"])
 
 if __name__=="__main__":
     main()
